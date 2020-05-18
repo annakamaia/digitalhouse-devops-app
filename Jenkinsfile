@@ -159,7 +159,7 @@ pipeline {
                         //sh "docker run -d --name app1 -p 8030:3000 178955609749.dkr.ecr.us-east-1.amazonaws.com/pi_gitgirls:latest"
                         withCredentials([[$class:'AmazonWebServicesCredentialsBinding' 
                             , credentialsId: "${CREDENTIALID_S3}"]]) {
-                          sh "docker run -d --name app1 -p 8030:3000 -e NODE_ENV=producao -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=dh-pigitgirls-homol ${REGISTRY_ADDRESS}/pi_gitgirls:latest"
+                          sh "docker run -d --name app1 -p 8030:3000 -e NODE_ENV=producao -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=dh-pigitgirls-prod ${REGISTRY_ADDRESS}/pi_gitgirls:latest"
                         }
                         sh "docker ps"
                         sh 'sleep 10'
