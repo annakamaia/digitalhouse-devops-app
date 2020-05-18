@@ -9,7 +9,6 @@ pipeline {
         AWS_ACCESS_KEY=""
         AWS_SECRET_ACCESS_KEY=""
         AWS_SDK_LOAD_CONFIG="0"
-        BUCKET_NAME="dh-pigitgirls"
         REGION="us-east-1" 
         PERMISSION=""
         ACCEPTED_FILE_FORMATS_ARRAY=""
@@ -109,7 +108,7 @@ pipeline {
                         sh "hostname"
                         sh "docker stop app1"
                         sh "docker rm app1"
-                        //sh "docker run -d --name app1 -p 8030:3000"
+                        //sh "docker run -d --name app1 -p 8030:3000 178955609749.dkr.ecr.us-east-1.amazonaws.com/pi_gitgirls"
                         withCredentials([[$class:'AmazonWebServicesCredentialsBinding' 
                             , credentialsId: "${CREDENTIALID_S3}"]]) {
                         sh "docker run -d --name app1 -p 8030:3000 -e NODE_ENV=homolog -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=dh-pigitgirls-homol ${REGISTRY_ADDRESS}/pi_gitgirls:latest"
@@ -157,10 +156,10 @@ pipeline {
                         sh "hostname"
                         sh "docker stop app1"
                         sh "docker rm app1"
-                        //sh "docker run -d --name app1 -p 8030:3000 933273154934.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
+                        //sh "docker run -d --name app1 -p 8030:3000 178955609749.dkr.ecr.us-east-1.amazonaws.com/pi_gitgirls:latest"
                         withCredentials([[$class:'AmazonWebServicesCredentialsBinding' 
                             , credentialsId: "${CREDENTIALID_S3}"]]) {
-                          sh "docker run -d --name app1 -p 8030:3000 -e NODE_ENV=producao -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=nome-bucket-producao-grupo 933273154934.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
+                          sh "docker run -d --name app1 -p 8030:3000 -e NODE_ENV=producao -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=dh-pigitgirls-homol ${REGISTRY_ADDRESS}/pi_gitgirls:latest"
                         }
                         sh "docker ps"
                         sh 'sleep 10'
